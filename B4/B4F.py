@@ -1,21 +1,21 @@
-from flask import Flask, jsonify
 from functools import reduce
+
+from flask import Flask, jsonify
 
 app = Flask(__name__)
 
-zahlen = [1, 2, 3, 4, 5]
-
-quadrierte_zahlen = list(map(lambda x: x**2, zahlen))
-gerade_zahlen = list(filter(lambda x: x % 2 == 0, quadrierte_zahlen))
-summe_aller_zahlen = reduce(lambda x, y: x + y, gerade_zahlen)
+namen = ["Mano", "Oliver", "Willy", "Kia"]
+namen_laenge = list(map(lambda x: len(x), namen))
+namen_mit_e = list(filter(lambda x: 'e' in x.lower(), namen))
+namen_laenge_summe = reduce(lambda x, y: x + y, namen_laenge)
 
 
 @app.route('/b4f')
-def kombinierte_funktionen_anwenden():
+def funktionen_anwenden():
     return jsonify(
-        quadrierte_zahlen=quadrierte_zahlen,
-        gerade_zahlen=gerade_zahlen,
-        summe_aller_zahlen=summe_aller_zahlen
+        namen_laenge=namen_laenge,
+        namen_mit_e=namen_mit_e,
+        namen_laenge_summe=namen_laenge_summe
     )
 
 
